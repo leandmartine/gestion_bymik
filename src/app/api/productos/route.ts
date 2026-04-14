@@ -27,12 +27,12 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const { nombre, descripcion, precio, stock } = body
 
-  if (!nombre || precio === undefined || stock === undefined) {
-    return NextResponse.json({ error: 'Datos incompletos' }, { status: 400 })
+  if (!nombre) {
+    return NextResponse.json({ error: 'Nombre requerido' }, { status: 400 })
   }
 
   if (isDevAuth(req)) {
-    const data = devProductos.create({ nombre, descripcion, precio: Number(precio), stock: Number(stock) })
+    const data = devProductos.create({ nombre, descripcion, precio: Number(precio ?? 0), stock: Number(stock ?? 0) })
     return NextResponse.json({ data }, { status: 201 })
   }
 
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 
   const { data, error } = await supabase
     .from('productos')
-    .insert({ user_id: user.id, nombre, descripcion: descripcion || null, precio: Number(precio), stock: Number(stock) })
+    .insert({ user_id: user.id, nombre, descripcion: descripcion || null, precio: Number(precio ?? 0), stock: Number(stock ?? 0) })
     .select()
     .single()
 

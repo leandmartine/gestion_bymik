@@ -56,6 +56,7 @@ export const ESTADO_CONFIG: Record<EstadoPedido, { label: string; color: string;
   enviado:     { label: 'Enviado',     color: 'text-purple-700', bg: 'bg-purple-100' },
   entregado:   { label: 'Entregado',   color: 'text-green-700',  bg: 'bg-green-100'  },
   cancelado:   { label: 'Cancelado',   color: 'text-red-700',    bg: 'bg-red-100'    },
+  devuelto:    { label: 'Devuelto',    color: 'text-neutral-600', bg: 'bg-neutral-100' },
 }
 
 /** Colores para categorías de clientes */

@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useProductos } from '@/hooks/useProductos'
 import { mesActual, formatMes, formatPrecio, ESTADO_CONFIG } from '@/lib/utils'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { ChevronLeft, ChevronRight, TrendingUp, ShoppingBag, Package, AlertTriangle } from 'lucide-react'
+import { ChevronLeft, ChevronRight, TrendingUp, ShoppingBag, Package, AlertTriangle, Users } from 'lucide-react'
 import { type MetricasMensuales } from '@/types/app'
 import { format, parseISO } from 'date-fns'
 import { es } from 'date-fns/locale'
@@ -129,6 +129,32 @@ export default function MetricasPage() {
                         </div>
                       </div>
                       <span className="text-xs text-neutral-500 w-16 text-right">{formatPrecio(p.total_vendido)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Clientes frecuentes */}
+            {(metricas.clientes_frecuentes ?? []).length > 0 && (
+              <div className="bg-white rounded-2xl border border-neutral-100 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Users className="w-4 h-4 text-neutral-400" />
+                  <p className="font-semibold text-black text-sm">Clientes frecuentes</p>
+                </div>
+                <div className="space-y-2">
+                  {metricas.clientes_frecuentes.map((c, i) => (
+                    <div key={c.cliente_id} className="flex items-center gap-3">
+                      <span className="w-5 text-xs text-neutral-400 font-medium">{i + 1}.</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-black font-medium truncate">{c.nombre}</span>
+                          <span className="text-xs text-neutral-500 shrink-0 ml-2">{formatPrecio(c.total_gastado)}</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-0.5">
+                          {c.num_pedidos} pedido{c.num_pedidos !== 1 ? 's' : ''}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>

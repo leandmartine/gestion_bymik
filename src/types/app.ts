@@ -60,7 +60,7 @@ export type ProductoCreate = Pick<Producto, 'nombre' | 'precio' | 'stock'> & {
 export type ProductoUpdate = Partial<ProductoCreate> & { activo?: boolean }
 
 // ─── Pedido ───────────────────────────────────────────────────────────────────
-export type EstadoPedido = 'pendiente' | 'preparando' | 'enviado' | 'entregado' | 'cancelado'
+export type EstadoPedido = 'pendiente' | 'preparando' | 'enviado' | 'entregado' | 'cancelado' | 'devuelto'
 
 export interface PedidoItem {
   id: string
@@ -121,6 +121,12 @@ export interface MetricasMensuales {
     total_vendido: number
   }>
   por_dia: Array<{ fecha: string; pedidos: number; total: number }>
+  clientes_frecuentes: Array<{
+    cliente_id: string
+    nombre: string
+    num_pedidos: number
+    total_gastado: number
+  }>
 }
 
 export interface SyncStatus {

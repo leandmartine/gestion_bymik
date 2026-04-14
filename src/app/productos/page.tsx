@@ -21,13 +21,13 @@ function ProductoForm({
 }) {
   const [nombre, setNombre] = useState(initial?.nombre ?? '')
   const [descripcion, setDescripcion] = useState(initial?.descripcion ?? '')
-  const [precio, setPrecio] = useState(String(initial?.precio ?? ''))
-  const [stock, setStock] = useState(String(initial?.stock ?? '0'))
+  const [precio, setPrecio] = useState(initial?.precio ? String(initial.precio) : '')
+  const [stock, setStock] = useState(initial?.stock ? String(initial.stock) : '')
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
-    if (!nombre || !precio) return
-    onSave({ nombre, descripcion, precio: Number(precio), stock: Number(stock) })
+    if (!nombre) return
+    onSave({ nombre, descripcion, precio: precio ? Number(precio) : 0, stock: stock ? Number(stock) : 0 })
   }
 
   return (
@@ -51,10 +51,9 @@ function ProductoForm({
           type="number"
           value={precio}
           onChange={(e) => setPrecio(e.target.value)}
-          placeholder="Precio"
+          placeholder="Precio (opcional)"
           min="0"
           step="1"
-          required
           className="flex-1 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black"
         />
         <input
@@ -165,7 +164,7 @@ export default function ProductosPage() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
                             <p className="font-medium text-black truncate">{producto.nombre}</p>
-                            {producto.stock <= 3 && (
+                            {producto.stock > 0 && producto.stock <= 3 && (
                               <span className="flex items-center gap-1 text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
                                 <AlertTriangle className="w-3 h-3" />
                                 Stock bajo
@@ -176,8 +175,12 @@ export default function ProductosPage() {
                             <p className="text-neutral-400 text-xs mt-0.5 truncate">{producto.descripcion}</p>
                           )}
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="font-semibold text-black text-sm">{formatPrecio(producto.precio)}</span>
-                            <span className="text-neutral-400 text-xs">Stock: {producto.stock}</span>
+                            <span className="font-semibold text-black text-sm">
+                              {producto.precio > 0 ? formatPrecio(producto.precio) : <span className="text-neutral-300">Sin precio</span>}
+                            </span>
+                            {producto.stock > 0 && (
+                              <span className="text-neutral-400 text-xs">Stock: {producto.stock}</span>
+                            )}
                           </div>
                         </div>
                         <div className="flex items-center gap-1 ml-2 shrink-0">

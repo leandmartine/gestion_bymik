@@ -81,7 +81,7 @@ export function useUpdatePedido() {
         soundEstado()
         const labels: Record<EstadoPedido, string> = {
           pendiente: 'Pendiente', preparando: 'Preparando',
-          enviado: 'Enviado ✈️', entregado: 'Entregado ✅', cancelado: 'Cancelado',
+          enviado: 'Enviado ✈️', entregado: 'Entregado ✅', cancelado: 'Cancelado', devuelto: 'Devuelto',
         }
         toast.success(`Estado: ${labels[vars.estado as EstadoPedido]}`)
       } else {

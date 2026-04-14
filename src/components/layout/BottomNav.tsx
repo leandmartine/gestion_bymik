@@ -19,8 +19,8 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-      <div className="bg-white/90 backdrop-blur-md border-t border-neutral-100 shadow-lg">
-        <div className="flex items-center justify-around px-2 pb-safe">
+      <div className="bg-white/90 backdrop-blur-md border-t border-neutral-100 shadow-lg" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        <div className="flex items-center justify-around px-2">
           {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href || pathname.startsWith(href + '/')
             return (

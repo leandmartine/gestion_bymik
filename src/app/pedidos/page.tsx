@@ -8,11 +8,12 @@ import { useClientes, useCreateCliente } from '@/hooks/useClientes'
 import { useProductos } from '@/hooks/useProductos'
 import { mesActual, formatPrecio, formatFecha, ESTADO_CONFIG } from '@/lib/utils'
 import {
-  Plus, Truck, X, Check, Trash2, ChevronDown, ChevronUp, User, ShoppingBag,
+  Plus, Truck, X, Check, Trash2, ChevronDown, ChevronUp, User, ShoppingBag, FileText,
 } from 'lucide-react'
+import Link from 'next/link'
 import { type EstadoPedido, type PedidoCreate } from '@/types/app'
 
-const ESTADOS: EstadoPedido[] = ['pendiente', 'preparando', 'enviado', 'entregado', 'cancelado']
+const ESTADOS: EstadoPedido[] = ['pendiente', 'preparando', 'enviado', 'entregado', 'cancelado', 'devuelto']
 
 function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   const { data: clientes = [] } = useClientes()
@@ -254,12 +255,12 @@ export default function PedidosPage() {
               const isExpanded = expanded === pedido.id
               return (
                 <motion.div key={pedido.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
-                  className="bg-white rounded-2xl border border-neutral-100 overflow-hidden">
+                  className={`bg-white rounded-2xl border overflow-hidden ${pedido.estado === 'devuelto' ? 'border-neutral-200 opacity-70' : 'border-neutral-100'}`}>
                   {/* Header */}
                   <div className="p-4 flex items-start gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="font-semibold text-black">{pedido.cliente?.nombre ?? '—'}</p>
+                        <p className={`font-semibold ${pedido.estado === 'devuelto' ? 'text-neutral-400 line-through' : 'text-black'}`}>{pedido.cliente?.nombre ?? '—'}</p>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color}`}>{cfg.label}</span>
                       </div>
                       <p className="text-neutral-400 text-xs mt-0.5">
@@ -272,6 +273,11 @@ export default function PedidosPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-1 shrink-0">
+                      <Link href={`/pedidos/${pedido.id}/factura`} target="_blank"
+                        className="p-2 rounded-xl text-neutral-400 hover:bg-neutral-100 transition-colors"
+                        title="Ver factura">
+                        <FileText className="w-4 h-4" />
+                      </Link>
                       <button onClick={() => setExpanded(isExpanded ? null : pedido.id)}
                         className="p-2 rounded-xl text-neutral-400 hover:bg-neutral-100 transition-colors">
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}

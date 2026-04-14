@@ -6,6 +6,7 @@ import { AuthProvider } from '@/providers/AuthProvider'
 import { CelebrationProvider } from '@/components/shared/Celebrations'
 import { EasterEgg } from '@/components/shared/EasterEgg'
 import { Toaster } from 'sonner'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0a',
+  viewportFit: 'cover',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -34,23 +36,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[var(--background)]">
-        <AuthProvider>
-          <QueryProvider>
-            {children}
-            <CelebrationProvider />
-            <EasterEgg />
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                style: {
-                  background: '#fff',
-                  border: '1px solid #e5e5e5',
-                  color: '#0a0a0a',
-                },
-              }}
-            />
-          </QueryProvider>
-        </AuthProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            <QueryProvider>
+              {children}
+              <CelebrationProvider />
+              <EasterEgg />
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  style: {
+                    background: '#fff',
+                    border: '1px solid #e5e5e5',
+                    color: '#0a0a0a',
+                  },
+                }}
+              />
+            </QueryProvider>
+          </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
