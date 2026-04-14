@@ -91,6 +91,15 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  // Sync sheets en background cuando cambia el estado
+  if (body.estado) {
+    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/sync/sheets`, {
+      method: 'POST',
+      headers: { Cookie: req.headers.get('cookie') ?? '' },
+    }).catch(() => {})
+  }
+
   return NextResponse.json({ data })
 }
 

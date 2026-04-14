@@ -158,16 +158,16 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
             <label className="text-sm font-semibold text-black">Productos *</label>
             <div className="flex gap-2">
               <select onChange={(e) => { if (e.target.value) { addItem(e.target.value); e.target.value = '' } }}
-                className="flex-1 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black">
+                className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black">
                 <option value="">Agregar producto...</option>
                 {productos.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.nombre}{p.precio > 0 ? ` — ${formatPrecio(p.precio)}` : ''}{p.stock > 0 ? ` (stock: ${p.stock})` : ''}
+                    {p.nombre}{p.precio > 0 ? ` — ${formatPrecio(p.precio)}` : ''}{p.stock > 0 ? ` (${p.stock})` : ''}
                   </option>
                 ))}
               </select>
               <button type="button" onClick={() => setShowNuevoProducto(!showNuevoProducto)}
-                className="px-3 py-2 rounded-xl border border-neutral-200 text-sm text-neutral-600 hover:bg-neutral-100 transition-colors whitespace-nowrap flex items-center gap-1">
+                className="shrink-0 px-3 py-2 rounded-xl border border-neutral-200 text-sm text-neutral-600 hover:bg-neutral-100 transition-colors flex items-center gap-1">
                 <Package className="w-4 h-4" /> Nuevo
               </button>
             </div>
