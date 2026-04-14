@@ -129,5 +129,11 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { error } = await supabase.from('pedidos').delete().eq('id', id).eq('user_id', user.id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/sync/sheets`, {
+    method: 'POST',
+    headers: { Cookie: req.headers.get('cookie') ?? '' },
+  }).catch(() => {})
+
   return NextResponse.json({ ok: true })
 }
