@@ -4,14 +4,17 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
-  LayoutDashboard, ShoppingBag, Package, Users, BarChart2, Settings, LogOut,
+  LayoutDashboard, ShoppingBag, Package, Users, BarChart2,
+  Settings, LogOut, LayoutGrid,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getSupabaseClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 
+const HUB_URL = process.env.NEXT_PUBLIC_HUB_URL ?? 'http://localhost:3000'
+
 const NAV_ITEMS = [
-  { href: '/dashboard',     label: 'Dashboard',   icon: LayoutDashboard },
+  { href: '/dashboard',     label: 'Dashboard',    icon: LayoutDashboard },
   { href: '/pedidos',       label: 'Pedidos',      icon: ShoppingBag },
   { href: '/productos',     label: 'Productos',    icon: Package },
   { href: '/clientes',      label: 'Clientes',     icon: Users },
@@ -78,8 +81,18 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="p-4 border-t border-neutral-100">
+      {/* Selector de proyectos + Logout */}
+      <div className="p-4 border-t border-neutral-100 space-y-1">
+        <a href={HUB_URL}>
+          <motion.div
+            whileHover={{ x: 3 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-neutral-400 hover:bg-neutral-100 hover:text-black transition-all"
+          >
+            <LayoutGrid className="w-4 h-4" />
+            Mis proyectos
+          </motion.div>
+        </a>
         <button
           onClick={handleLogout}
           className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm font-medium text-neutral-400 hover:bg-neutral-100 hover:text-black transition-all"
