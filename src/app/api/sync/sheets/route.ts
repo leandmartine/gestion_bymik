@@ -24,11 +24,14 @@ export async function POST(req: NextRequest) {
     }
 
     const mes = mesActual()
+    const [y, m] = mes.split('-').map(Number)
+    const nextMes = m === 12 ? `${y + 1}-01-01` : `${y}-${String(m + 1).padStart(2, '0')}-01`
     const { data: pedidos } = await supabase
       .from('pedidos')
       .select('*, cliente:clientes(nombre, telefono), items:pedido_items(cantidad, precio_unitario, producto:productos(nombre))')
       .eq('user_id', user.id)
       .gte('created_at', `${mes}-01`)
+      .lt('created_at', nextMes)
 
     if (!pedidos?.length) return NextResponse.json({ ok: true, records_synced: 0 })
 
@@ -50,25 +53,23 @@ export async function POST(req: NextRequest) {
       })
     } catch {}
 
-    const headers = [['Fecha', 'Cliente', 'Teléfono', 'Productos', 'Total', 'Estado', 'Envío', 'Agencia', 'Dirección envío', 'Notas']]
-    const rows = pedidos.map((p) => {
-      const productos = (p.items ?? [])
-        .map((i: { cantidad: number; producto?: { nombre: string }; precio_unitario: number }) =>
-          `${i.cantidad}x ${i.producto?.nombre ?? '?'} ($${i.precio_unitario})`)
-        .join(', ')
-      return [
-        p.created_at?.slice(0, 10) ?? '',
-        p.cliente?.nombre ?? '',
-        p.cliente?.telefono ?? '',
-        productos,
-        p.total ?? 0,
-        p.estado ?? '',
-        p.tiene_envio ? 'Sí' : 'No',
-        p.agencia_envio ?? '',
-        p.direccion_envio ?? '',
-        p.notas ?? '',
-      ]
-    })
+    const headers = [['# Pedido', 'Fecha', 'Cliente', 'Teléfono', 'Producto', 'Cantidad', 'Precio unit.', 'Subtotal', 'Total pedido', 'Estado', 'Envío', 'Agencia', 'Dirección envío', 'Notas']]
+    const rows: (string | number)[][] = []
+    let totalItems = 0
+    for (const p of pedidos) {
+      const pedidoId = p.id.slice(0, 8).toUpperCase()
+      const items = (p.items ?? []) as Array<{ cantidad: number; precio_unitario: number; producto?: { nombre: string } }>
+      if (items.length === 0) {
+        rows.push([pedidoId, p.created_at?.slice(0, 10) ?? '', p.cliente?.nombre ?? '', p.cliente?.telefono ?? '', '—', 0, 0, 0, p.total ?? 0, p.estado ?? '', p.tiene_envio ? 'Sí' : 'No', p.agencia_envio ?? '', p.direccion_envio ?? '', p.notas ?? ''])
+        totalItems++
+      } else {
+        for (const item of items) {
+          const subtotal = item.cantidad * item.precio_unitario
+          rows.push([pedidoId, p.created_at?.slice(0, 10) ?? '', p.cliente?.nombre ?? '', p.cliente?.telefono ?? '', item.producto?.nombre ?? '?', item.cantidad, item.precio_unitario, subtotal, p.total ?? 0, p.estado ?? '', p.tiene_envio ? 'Sí' : 'No', p.agencia_envio ?? '', p.direccion_envio ?? '', p.notas ?? ''])
+          totalItems++
+        }
+      }
+    }
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: profile.sheets_spreadsheet_id,
@@ -102,10 +103,10 @@ export async function POST(req: NextRequest) {
 
     await supabase.from('sync_log').insert({
       user_id: user.id, status: 'success',
-      records_synced: pedidos.length, synced_at: new Date().toISOString(),
+      records_synced: totalItems, synced_at: new Date().toISOString(),
     })
 
-    return NextResponse.json({ ok: true, records_synced: pedidos.length })
+    return NextResponse.json({ ok: true, records_synced: totalItems })
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Error desconocido'
     await supabase.from('sync_log').insert({

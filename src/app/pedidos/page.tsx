@@ -5,10 +5,10 @@ import { AppLayout } from '@/app/layout-app'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePedidos, useCreatePedido, useUpdatePedido, useDeletePedido } from '@/hooks/usePedidos'
 import { useClientes, useCreateCliente } from '@/hooks/useClientes'
-import { useProductos } from '@/hooks/useProductos'
+import { useProductos, useCreateProducto } from '@/hooks/useProductos'
 import { mesActual, formatPrecio, formatFecha, ESTADO_CONFIG } from '@/lib/utils'
 import {
-  Plus, Truck, X, Check, Trash2, ChevronDown, ChevronUp, User, ShoppingBag, FileText,
+  Plus, Truck, X, Check, Trash2, ChevronDown, ChevronUp, User, ShoppingBag, FileText, Package,
 } from 'lucide-react'
 import Link from 'next/link'
 import { type EstadoPedido, type PedidoCreate } from '@/types/app'
@@ -20,6 +20,7 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   const { data: productos = [] } = useProductos()
   const createM = useCreatePedido()
   const createCliente = useCreateCliente()
+  const createProducto = useCreateProducto()
 
   const [clienteId, setClienteId] = useState('')
   const [items, setItems] = useState<Array<{ producto_id: string; cantidad: number; precio_unitario: number }>>([])
@@ -33,6 +34,11 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   const [showNuevoCliente, setShowNuevoCliente] = useState(false)
   const [nuevoNombre, setNuevoNombre] = useState('')
   const [nuevoTelefono, setNuevoTelefono] = useState('')
+
+  // Nuevo producto rápido
+  const [showNuevoProducto, setShowNuevoProducto] = useState(false)
+  const [nuevoProductoNombre, setNuevoProductoNombre] = useState('')
+  const [nuevoProductoPrecio, setNuevoProductoPrecio] = useState('')
 
   function addItem(productoId: string) {
     const prod = productos.find((p) => p.id === productoId)
@@ -64,6 +70,19 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
     setShowNuevoCliente(false)
     setNuevoNombre('')
     setNuevoTelefono('')
+  }
+
+  async function crearProductoRapido() {
+    if (!nuevoProductoNombre) return
+    const result = await createProducto.mutateAsync({
+      nombre: nuevoProductoNombre,
+      precio: nuevoProductoPrecio ? Number(nuevoProductoPrecio) : 0,
+      stock: 0,
+    })
+    addItem(result.id)
+    setShowNuevoProducto(false)
+    setNuevoProductoNombre('')
+    setNuevoProductoPrecio('')
   }
 
   function submit(e: React.FormEvent) {
@@ -137,13 +156,38 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
           {/* Productos */}
           <div className="space-y-2">
             <label className="text-sm font-semibold text-black">Productos *</label>
-            <select onChange={(e) => { if (e.target.value) { addItem(e.target.value); e.target.value = '' } }}
-              className="w-full px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black">
-              <option value="">Agregar producto...</option>
-              {productos.filter((p) => p.stock > 0).map((p) => (
-                <option key={p.id} value={p.id}>{p.nombre} — {formatPrecio(p.precio)} (stock: {p.stock})</option>
-              ))}
-            </select>
+            <div className="flex gap-2">
+              <select onChange={(e) => { if (e.target.value) { addItem(e.target.value); e.target.value = '' } }}
+                className="flex-1 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black">
+                <option value="">Agregar producto...</option>
+                {productos.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.nombre}{p.precio > 0 ? ` — ${formatPrecio(p.precio)}` : ''}{p.stock > 0 ? ` (stock: ${p.stock})` : ''}
+                  </option>
+                ))}
+              </select>
+              <button type="button" onClick={() => setShowNuevoProducto(!showNuevoProducto)}
+                className="px-3 py-2 rounded-xl border border-neutral-200 text-sm text-neutral-600 hover:bg-neutral-100 transition-colors whitespace-nowrap flex items-center gap-1">
+                <Package className="w-4 h-4" /> Nuevo
+              </button>
+            </div>
+
+            <AnimatePresence>
+              {showNuevoProducto && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+                  className="bg-neutral-50 rounded-xl p-3 space-y-2 overflow-hidden border border-neutral-200">
+                  <p className="text-xs font-medium text-neutral-600">Producto rápido</p>
+                  <input value={nuevoProductoNombre} onChange={(e) => setNuevoProductoNombre(e.target.value)} placeholder="Nombre *"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-sm focus:outline-none focus:border-black" />
+                  <input type="number" value={nuevoProductoPrecio} onChange={(e) => setNuevoProductoPrecio(e.target.value)} placeholder="Precio (opcional)"
+                    min="0" className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-sm focus:outline-none focus:border-black" />
+                  <button type="button" onClick={crearProductoRapido} disabled={createProducto.isPending || !nuevoProductoNombre}
+                    className="w-full py-2 bg-black text-white rounded-lg text-sm disabled:opacity-50">
+                    {createProducto.isPending ? '...' : 'Crear y agregar'}
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {items.length > 0 && (
               <div className="space-y-1.5">

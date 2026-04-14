@@ -17,7 +17,10 @@ export async function GET(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
   const desde = `${mes}-01`
-  const hasta = `${mes}-31`
+  const [year, month] = mes.split('-').map(Number)
+  const nextMes = month === 12
+    ? `${year + 1}-01-01`
+    : `${year}-${String(month + 1).padStart(2, '0')}-01`
 
   const { data, error } = await supabase
     .from('pedidos')
@@ -28,7 +31,7 @@ export async function GET(req: NextRequest) {
     `)
     .eq('user_id', user.id)
     .gte('created_at', desde)
-    .lte('created_at', hasta)
+    .lt('created_at', nextMes)
     .order('created_at', { ascending: false })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
