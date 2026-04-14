@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { AppLayout } from '@/app/layout-app'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useQueryClient } from '@tanstack/react-query'
 import { usePedidos, useCreatePedido, useUpdatePedido, useDeletePedido } from '@/hooks/usePedidos'
 import { useClientes, useCreateCliente } from '@/hooks/useClientes'
 import { useProductos, useCreateProducto } from '@/hooks/useProductos'
+import { type Cliente, type Producto } from '@/types/app'
 import { mesActual, formatPrecio, formatFecha, ESTADO_CONFIG } from '@/lib/utils'
 import {
   Plus, Truck, X, Check, Trash2, ChevronDown, ChevronUp, User, ShoppingBag, FileText, Package,
@@ -18,6 +20,7 @@ const ESTADOS: EstadoPedido[] = ['pendiente', 'preparando', 'enviado', 'entregad
 function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   const { data: clientes = [] } = useClientes()
   const { data: productos = [] } = useProductos()
+  const qc = useQueryClient()
   const createM = useCreatePedido()
   const createCliente = useCreateCliente()
   const createProducto = useCreateProducto()
@@ -66,6 +69,9 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   async function crearClienteRapido() {
     if (!nuevoNombre || !nuevoTelefono) return
     const result = await createCliente.mutateAsync({ nombre: nuevoNombre, telefono: nuevoTelefono })
+    qc.setQueryData<Cliente[]>(['clientes'], (old = []) =>
+      [...old, result].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    )
     setClienteId(result.id)
     setShowNuevoCliente(false)
     setNuevoNombre('')
@@ -79,7 +85,18 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
       precio: nuevoProductoPrecio ? Number(nuevoProductoPrecio) : 0,
       stock: 0,
     })
-    addItem(result.id)
+    // Actualizar cache inmediatamente para que aparezca en el select
+    qc.setQueryData<Producto[]>(['productos'], (old = []) =>
+      [...old, result].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    )
+    // Agregar directo al pedido con los datos que ya tenemos
+    setItems((prev) => {
+      const exists = prev.findIndex((i) => i.producto_id === result.id)
+      if (exists !== -1) {
+        return prev.map((i) => i.producto_id === result.id ? { ...i, cantidad: i.cantidad + 1 } : i)
+      }
+      return [...prev, { producto_id: result.id, cantidad: 1, precio_unitario: result.precio }]
+    })
     setShowNuevoProducto(false)
     setNuevoProductoNombre('')
     setNuevoProductoPrecio('')
@@ -101,12 +118,16 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4">
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4"
+      onClick={onClose}
+    >
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 60 }}
         className="bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 bg-white px-5 pt-5 pb-3 border-b border-neutral-100 flex items-center justify-between">
           <h2 className="font-bold text-black text-lg">Nuevo pedido</h2>
@@ -127,7 +148,9 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
                 className="flex-1 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black"
               >
                 <option value="">Seleccionar cliente...</option>
-                {clientes.map((c) => <option key={c.id} value={c.id}>{c.nombre} — {c.telefono}</option>)}
+                {[...clientes].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')).map((c) => (
+                  <option key={c.id} value={c.id}>{c.nombre} — {c.telefono}</option>
+                ))}
               </select>
               <button type="button" onClick={() => setShowNuevoCliente(!showNuevoCliente)}
                 className="px-3 py-2 rounded-xl border border-neutral-200 text-sm text-neutral-600 hover:bg-neutral-100 transition-colors whitespace-nowrap flex items-center gap-1">
@@ -160,7 +183,7 @@ function NuevoPedidoForm({ onClose }: { onClose: () => void }) {
               <select onChange={(e) => { if (e.target.value) { addItem(e.target.value); e.target.value = '' } }}
                 className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-neutral-200 bg-neutral-50 text-sm focus:outline-none focus:border-black">
                 <option value="">Agregar producto...</option>
-                {productos.map((p) => (
+                {[...productos].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')).map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.nombre}{p.precio > 0 ? ` — ${formatPrecio(p.precio)}` : ''}{p.stock > 0 ? ` (${p.stock})` : ''}
                   </option>

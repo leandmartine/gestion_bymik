@@ -20,14 +20,15 @@ export async function GET(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
   const desde = `${mes}-01`
-  const hasta = `${mes}-31`
+  const [y, m] = mes.split('-').map(Number)
+  const nextMes = m === 12 ? `${y + 1}-01-01` : `${y}-${String(m + 1).padStart(2, '0')}-01`
 
   const { data: pedidos, error } = await supabase
     .from('pedidos')
     .select(`*, cliente:clientes(id, nombre), items:pedido_items(*, producto:productos(id, nombre))`)
     .eq('user_id', user.id)
     .gte('created_at', desde)
-    .lte('created_at', hasta)
+    .lt('created_at', nextMes)
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   const data = calcularMetricas(mes, pedidos ?? [])
