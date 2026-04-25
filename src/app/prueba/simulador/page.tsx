@@ -68,30 +68,6 @@ const ALL_QUESTIONS: Question[] = [
   { cat: 'Policía', q: '¿En qué calles está la Comisaría de la Seccional 24ª?', opts: ['Av. Luis Batlle Berres y Camino del Fortín', 'Camino Maldonado y Roma', 'Prusia y Río de Janeiro', 'Camino Melilla y Peabody'], ans: 2, exp: 'La Seccional 24ª se encuentra en Prusia y Río de Janeiro.' },
   { cat: 'Policía', q: '¿Dónde se encuentra la Policía Nacional de Tránsito?', opts: ['San José y Yí', 'Carreras Nacionales y Calamet', 'Camino Maldonado y Roma', 'Bv. Artigas y Cufré'], ans: 2, exp: 'La Policía Nacional de Tránsito tiene su sede en Camino Maldonado y Roma.' },
 
-  // NORMATIVA
-  { cat: 'Normativa', q: '¿Cuántos viajes mínimos debe realizar un permisario por mes para mantener su permiso activo?', opts: ['5 viajes', '10 viajes', '20 viajes', 'No hay mínimo establecido'], ans: 1, exp: 'La normativa exige un mínimo de 10 viajes por mes. Si no se cumple, el permisario puede perder la habilitación.' },
-  { cat: 'Normativa', q: '¿Cuántos permisarios puede haber como máximo en el sistema de Montevideo?', opts: ['1.000', '2.500', '4.000', 'No hay límite'], ans: 2, exp: 'El cupo máximo del sistema es de 4.000 permisarios activos simultáneamente en Montevideo.' },
-  { cat: 'Normativa', q: '¿El vehículo puede estar registrado a nombre de un familiar del permisario?', opts: ['Sí, de cualquier familiar directo', 'Sí, solo del cónyuge con poder notarial', 'No, debe estar obligatoriamente a nombre del propio permisario', 'Sí, con autorización de la IM'], ans: 2, exp: 'El vehículo debe estar registrado a nombre del permisario. No admite excepciones.' },
-  { cat: 'Normativa', q: '¿Cuántos conductores adicionales se pueden registrar en un mismo permiso?', opts: ['Ninguno, solo el permisario puede conducir', 'Solo uno, y debe ser familiar hasta 2° grado de consanguinidad', 'Hasta dos, sin restricción de parentesco', 'Hasta tres con autorización especial'], ans: 1, exp: 'Se permite solo un conductor adicional, familiar hasta segundo grado de consanguinidad (hijo, padre, hermano, cónyuge).' },
-  { cat: 'Normativa', q: '¿Qué pasa si el aspirante no presenta los requisitos dentro del plazo de la convocatoria?', opts: ['Se le otorga prórroga automática de 30 días', 'Paga una multa y sigue en lista', 'Es descartado definitivamente de la lista de aspirantes', 'Pasa al final de la lista pero no se va'], ans: 2, exp: 'Si no cumple en el plazo indicado, el aspirante es descartado de la lista y pierde su lugar definitivamente.' },
-  { cat: 'Normativa', q: '¿Con qué frecuencia mínima debe el permisario revisar su buzón de notificaciones electrónico de la IM?', opts: ['Cada semana', 'Al menos una vez al mes', 'Cada 15 días', 'Solo cuando la IM lo contacte por otro medio'], ans: 1, exp: 'La IM notifica todo por el domicilio electrónico. No revisarlo puede provocar la suspensión del permiso.' },
-  { cat: 'Normativa', q: '¿Qué organismo emite y regula el permiso para operar como permisario en Montevideo?', opts: ['El Ministerio de Transporte (MTOP)', 'La Intendencia de Montevideo a través de la Unidad Administración de Transporte', 'Uber o Cabify directamente', 'La Dirección Nacional de Tránsito'], ans: 1, exp: 'Es la Intendencia de Montevideo, a través de la Unidad Administración de Transporte (UAT), quien otorga y regula el permiso.' },
-  { cat: 'Normativa', q: '¿La categoría E requiere examen práctico para obtenerla?', opts: ['Sí, siempre es obligatorio', 'No, está exonerada del práctico si la licencia anterior no está vencida más de 2 años', 'Solo si la academia lo solicita', 'Depende de la cantidad de años de experiencia'], ans: 1, exp: 'La categoría E no requiere examen práctico, siempre que la licencia no esté vencida por más de 2 años. Solo se rinde el teórico.' },
-
-  // VEHÍCULO
-  { cat: 'Vehículo', q: '¿Cuál es la antigüedad máxima permitida para un vehículo 100% eléctrico destinado al transporte de pasajeros?', opts: ['5 años', '6 años', '8 años', '10 años'], ans: 3, exp: 'Los vehículos eléctricos tienen un tope de 10 años de antigüedad. Para vehículos a combustión, el límite es de 6 años.' },
-  { cat: 'Vehículo', q: '¿Cuál es la antigüedad máxima para vehículos a combustión usados como permisario?', opts: ['4 años', '6 años', '8 años', '10 años'], ans: 1, exp: 'Los vehículos a combustión tienen un máximo de 6 años de antigüedad para poder registrarse como permisario.' },
-  { cat: 'Vehículo', q: '¿Dónde debe estar empadronado el vehículo para operar como permisario en Montevideo?', opts: ['En cualquier departamento del país', 'En el departamento de residencia del permisario', 'En Montevideo', 'No hay requisito de empadronamiento'], ans: 2, exp: 'El vehículo debe estar empadronado en Montevideo para poder operar en el departamento.' },
-  { cat: 'Vehículo', q: '¿El seguro obligatorio de automotores (SOA) es suficiente para operar como permisario?', opts: ['Sí, el SOA cubre todo lo necesario', 'No, se necesita póliza adicional con cobertura de transporte de pasajeros', 'Solo si el vehículo es eléctrico', 'Sí, combinado con el carné de salud'], ans: 1, exp: 'El SOA no es suficiente. Se requiere póliza específica con Responsabilidad Civil Pasajeros y RC Extracontractual.' },
-  { cat: 'Vehículo', q: '¿Cuál es el monto mínimo de cobertura por persona en la póliza del permisario?', opts: ['500.000 UI', '1.000.000 UI', '1.500.000 UI por cobertura', '3.000.000 UI'], ans: 2, exp: 'Cada cobertura debe tener mínimo 1.500.000 UI por persona lesionada o muerta.' },
-  { cat: 'Vehículo', q: '¿Cuál de estas NO es una planta habilitada por la IM para la Inspección Técnica Vehicular?', opts: ['Autotest — La Paz 1970', 'AutoOK — Larrañaga 3347', 'Autodiagnóstico — Av. San Martín 3140', 'Autovision — Av. Italia 3800'], ans: 3, exp: 'Las plantas habilitadas son Autotest, AutoOK y Autodiagnóstico. Autovision no existe como planta habilitada.' },
-
-  // DOCUMENTACIÓN
-  { cat: 'Documentación', q: '¿El carné de salud laboral puede presentarse en fotocopia?', opts: ['Sí, con firma del médico actuante', 'Sí, certificada por escribano público', 'No, debe presentarse el original', 'Solo si la fotocopia está legalizada'], ans: 2, exp: 'El carné de salud laboral debe presentarse en original. No se aceptan fotocopias de ningún tipo.' },
-  { cat: 'Documentación', q: '¿Qué certifica el Certificado de la Ley 19.889?', opts: ['Que el conductor no tiene multas de tránsito', 'No inscripción en el registro nacional de violadores y abusadores sexuales', 'Que el conductor tiene antecedentes penales limpios', 'Que la empresa está habilitada por BPS'], ans: 1, exp: 'La Ley 19.889 creó el registro de violadores y abusadores sexuales. El certificado acredita que la persona no figura en dicho registro.' },
-  { cat: 'Documentación', q: '¿Qué es el Formulario 6906 de BPS y por qué se necesita?', opts: ['Es el formulario para registrar el vehículo en la IM', 'Certifica la inscripción y situación tributaria del contribuyente ante BPS', 'Es el comprobante de pago del canon mensual a la IM', 'Es la declaración de viajes ante DGI'], ans: 1, exp: 'El Formulario 6906 es emitido por BPS y certifica la situación del contribuyente. Es requerido para el alta del permiso.' },
-  { cat: 'Documentación', q: '¿Qué es el domicilio electrónico (GUB.UY) y por qué lo pide la IM?', opts: ['Es una dirección de email cualquiera', 'Es el buzón oficial digital a través del cual la IM notifica al permisario todo lo relevante', 'Es solo para pagar impuestos online', 'Es el usuario de la app de Uber o Cabify'], ans: 1, exp: 'El domicilio electrónico en GUB.UY es el canal oficial de comunicación entre la IM y el permisario. Es obligatorio tenerlo.' },
-
   // SEGURIDAD VIAL
   { cat: 'Seguridad vial', q: '¿Cuál es la tolerancia de alcohol en sangre para conductores profesionales?', opts: ['0.3 g/l (igual que para particulares)', '0.5 g/l', '0.8 g/l', 'Cero — tolerancia absoluta'], ans: 3, exp: 'Para conductores profesionales (categoría E incluida) la tolerancia es CERO. Cualquier valor positivo es infracción.' },
   { cat: 'Seguridad vial', q: '¿Qué mide la espirometría en el control de alcoholemia?', opts: ['Alcohol en sangre mediante extracción', 'Alcohol en el aire espirado a través del espirómetro', 'Nivel de glucosa en sangre', 'Capacidad pulmonar del conductor'], ans: 1, exp: 'La espirometría mide el alcohol presente en el aire espirado. Es un método no invasivo con un espirómetro.' },
@@ -121,6 +97,53 @@ const ALL_QUESTIONS: Question[] = [
   { cat: 'Mercancías peligrosas', q: '¿Qué color tiene el panel de seguridad de mercancías peligrosas?', opts: ['Rojo con números blancos', 'Naranja con números negros', 'Amarillo con números negros', 'Blanco con números rojos'], ans: 1, exp: 'El panel de seguridad es naranja con números negros. El numero superior indica el riesgo y el inferior el número ONU.' },
   { cat: 'Mercancías peligrosas', q: '¿Cuál es la clase 3 de mercancías peligrosas?', opts: ['Explosivos', 'Gases inflamables', 'Líquidos inflamables', 'Materias radiactivas'], ans: 2, exp: 'La clase 3 corresponde a Líquidos inflamables. Los explosivos son clase 1, los gases clase 2, y los radiactivos clase 7.' },
   { cat: 'Mercancías peligrosas', q: '¿Qué forma tienen las etiquetas de riesgo de mercancías peligrosas?', opts: ['Circulares con fondo rojo', 'Cuadradas con borde negro', 'En forma de losange (rombo) con fondo de color según la clase', 'Triangulares con número en el centro'], ans: 2, exp: 'Las etiquetas tienen forma de losange (rombo rotado 45°) con diferentes colores según la clase de peligro.' },
+
+  // SOMNOLENCIA Y FATIGA
+  { cat: 'Somnolencia y fatiga', q: '¿Qué debe hacer el conductor al sentir somnolencia mientras conduce?', opts: ['Bajar la velocidad y seguir conduciendo con precaución', 'Detenerse en un lugar seguro y descansar el tiempo necesario', 'Tomar café o bebidas energizantes para mantenerse despierto', 'Abrir las ventanas y continuar hasta el destino'], ans: 1, exp: 'Ante la somnolencia, el conductor debe detenerse en un lugar seguro y descansar el tiempo que sea necesario. En lo posible, evitar dormir en la vía pública.' },
+  { cat: 'Somnolencia y fatiga', q: '¿Cuál de estas NO es una causa reconocida de fatiga al conducir según el manual?', opts: ['Exceso de horas de servicio', 'Monotonía del paisaje y horarios irregulares', 'Conducción diurna con buen clima y tráfico fluido', 'Déficit de horas de sueño y manejo nocturno'], ans: 2, exp: 'Las causas de fatiga incluyen: exceso de horas de servicio, déficit de sueño, manejo nocturno, comidas copiosas, ayuno, monotonía del paisaje y horarios irregulares. La conducción diurna con buen clima no figura como causa.' },
+  { cat: 'Somnolencia y fatiga', q: '¿Qué se recomienda hacer cuando el conductor siente fatiga?', opts: ['Seguir conduciendo y escuchar música a alto volumen', 'Detenerse en lugar seguro, beber agua y hacer ejercicio físico como caminar', 'Acelerar para llegar más rápido al destino y descansar allí', 'Pasar la conducción a un pasajero hasta recuperarse'], ans: 1, exp: 'Ante la fatiga: detenerse en lugar seguro, beber agua y hacer ejercicio físico como caminar. No continuar conduciendo en ese estado.' },
+
+  // ESPEJOS Y ÁNGULOS MUERTOS
+  { cat: 'Espejos y ángulos muertos', q: '¿Por qué los espejos exteriores convexos hacen que otros vehículos parezcan más lejanos de lo que están?', opts: ['Porque tienen mayor ángulo de visión pero hacen que todo se vea más pequeño', 'Porque están diseñados exclusivamente para vehículos de gran porte', 'Porque solo funcionan correctamente de noche', 'Porque distorsionan el color de los vehículos reflejados'], ans: 0, exp: 'Los espejos convexos cubren mayor ángulo de visión pero los vehículos se ven más pequeños que en los planos, por lo que parecen más alejados de lo que están en realidad.' },
+  { cat: 'Espejos y ángulos muertos', q: '¿Cuándo se deben observar los espejos retrovisores?', opts: ['Solo al cambiar de carril o al girar', 'Con frecuencia y brevedad, antes de señalizar y realizar maniobras y antes de bajarse del vehículo', 'Únicamente al frenar o detener el vehículo', 'Solo cuando hay tráfico denso detrás'], ans: 1, exp: 'Se debe observar a través de los espejos con frecuencia y brevedad, antes de señalizar y realizar las maniobras y también antes de bajarse del vehículo.' },
+
+  // CARGAS
+  { cat: 'Cargas', q: '¿Qué puede ocurrir con una carga mal sujeta durante una frenada brusca?', opts: ['Permanece en su lugar si está bien embalada', 'Se desplaza siempre hacia atrás sin importar el embalaje', 'Puede desplazarse con gran fuerza, dañando ocupantes, vehículo o saliendo despedida', 'Solo afecta al vehículo, nunca a los ocupantes'], ans: 2, exp: 'Las cargas mal sujetas pueden desplazarse con fuerza excepcional en una frenada, provocando daños en los ocupantes, en el vehículo o en la propia carga, que incluso puede perderse o salir despedida.' },
+  { cat: 'Cargas', q: 'Al subir una pendiente y acelerar, ¿hacia dónde tiende a desplazarse la carga?', opts: ['Hacia la parte delantera del vehículo', 'Hacia la parte trasera del vehículo', 'Hacia los laterales del compartimento', 'Permanece estática en pendientes ascendentes'], ans: 1, exp: 'Al subir una pendiente y acelerar al mismo tiempo, la carga tiende a desplazarse hacia la parte trasera. En descenso con frenada brusca, tiende a ir hacia la parte delantera.' },
+  { cat: 'Cargas', q: '¿Dónde deben colocarse las cargas más pesadas dentro del vehículo?', opts: ['Lo más arriba posible para equilibrar la distribución', 'En la parte trasera del compartimento para facilitar la descarga', 'En la parte más baja posible del vehículo para mejorar la estabilidad', 'En los laterales sin importar la altura'], ans: 2, exp: 'Las cargas más pesadas deben colocarse en la parte más baja posible del vehículo para mejorar su estabilidad. Nunca se deben colocar sobre otras más ligeras.' },
+  { cat: 'Cargas', q: '¿Qué tipos de carga NO deben transportarse conjuntamente?', opts: ['Cargas de diferente peso o volumen', 'Materias peligrosas con alimentos, o productos que generen olores con los que se vean afectados por ellos', 'Cargas de diferente tamaño o forma', 'Productos de distinto color o embalaje exterior'], ans: 1, exp: 'No deben cargarse conjuntamente cargas que puedan perjudicarse entre sí: materias peligrosas con alimentos, materias humedecidas con las que se vean afectadas, productos con olores con los que se vean perjudicados por ellos.' },
+
+  // EFECTO TIJERA
+  { cat: 'Efecto tijera', q: '¿Qué es el efecto tijera en vehículos con semirremolque?', opts: ['Un sistema de frenado automático de emergencia', 'Un fenómeno que ocurre cuando las fuerzas que actúan sobre la unidad superan la adherencia', 'La maniobra de giro cerrado con semirremolque en ciudad', 'Un tipo de freno auxiliar especial para remolques'], ans: 1, exp: 'El efecto tijera se produce técnicamente cuando las fuerzas que actúan sobre la unidad superan la adherencia de la misma. Sus efectos son inmediatos y en muchos casos catastróficos.' },
+  { cat: 'Efecto tijera', q: '¿Qué se debe hacer si comienza a producirse un efecto tijera?', opts: ['Frenar inmediatamente y girar el volante en sentido contrario', 'Desembragar para separar el motor del semirremolque', 'No quitar el pie del acelerador, no frenar, y no desembragar en la medida de lo posible', 'Detener el vehículo de emergencia en el arcén derecho'], ans: 2, exp: 'Ante un efecto tijera: no quitar el pie del acelerador, no frenar, no desembragar en la medida de lo posible, y acelerar si se puede con una relación de cambio que dé fuerza rápidamente.' },
+  { cat: 'Efecto tijera', q: '¿Cuál de estas condiciones favorece el efecto tijera?', opts: ['Carga correctamente distribuida y pavimento seco en recta', 'Baja velocidad en carretera recta con buen pavimento', 'Pavimento deslizante, velocidad excesiva en curva, o frenada brusca con bloqueo de ruedas del semirremolque', 'Uso correcto y sincronizado de los frenos auxiliares'], ans: 2, exp: 'Favorecen el efecto tijera: carga mal distribuida con exceso delantero, pavimento deslizante o en mal estado, velocidad excesiva en carretera sinuosa, y frenada brusca con bloqueo de ruedas del semirremolque.' },
+
+  // TACÓGRAFO
+  { cat: 'Tacógrafo', q: '¿Para qué tipo de vehículos es obligatorio el tacógrafo?', opts: ['Todos los vehículos de transporte de pasajeros sin excepción', 'Vehículos de más de 18 asientos destinados al transporte colectivo de pasajeros nacionales o internacionales', 'Solo camiones con más de 3.500 kg de carga útil', 'Todos los vehículos con más de 5 años de antigüedad'], ans: 1, exp: 'El tacógrafo es obligatorio para vehículos de más de 18 asientos destinados a servicios de transporte colectivo de pasajeros nacionales o internacionales (Decreto N° 7/982, modificado por Decreto N° 463/95).' },
+  { cat: 'Tacógrafo', q: '¿Qué registra el tacógrafo de forma continua?', opts: ['Únicamente la velocidad del vehículo', 'La velocidad, tiempo de marcha, tiempo de detención y distancias recorridas', 'Las aceleraciones y frenadas bruscas', 'La presión de los neumáticos y el nivel de combustible'], ans: 1, exp: 'El tacógrafo registra de modo continuo en discos: velocidad del vehículo, tiempo de marcha, tiempo de detención y distancias recorridas. Los discos deben tener capacidad mínima de 24 horas.' },
+  { cat: 'Tacógrafo', q: '¿Con qué frecuencia deben someterse los tacógrafos a inspección de rutina?', opts: ['Cada 3 meses', 'Cada 6 meses', 'Anualmente', 'Cada 2 años'], ans: 1, exp: 'Los tacógrafos serán sometidos a una inspección de rutina cada seis meses y toda vez que se sospeche mal funcionamiento. La inspección es realizada por establecimientos habilitados.' },
+
+  // LUCES Y RETRORREFLECTANTES
+  { cat: 'Luces y retrorreflectantes', q: '¿Cuáles son las tres funciones principales de las luces en los vehículos?', opts: ['Adornar, indicar la matrícula y facilitar el estacionamiento', 'Ver, ser vistos e indicar la intención de hacer una maniobra o la existencia de un peligro', 'Solo iluminar la calzada y señalizar giros', 'Indicar velocidad, dirección y tipo de vehículo'], ans: 1, exp: 'Las luces tienen tres funciones: ver, ser vistos e indicar la intención de hacer una maniobra o la existencia de un peligro. También permiten conocer posición, distancia y sentido de circulación de los vehículos.' },
+  { cat: 'Luces y retrorreflectantes', q: '¿A qué distancia deben colocarse las balizas (triángulos) en carreteras y caminos cuando un vehículo queda detenido en la calzada?', opts: ['A 15 metros por detrás y adelante del vehículo', 'A 30 metros por detrás y adelante del vehículo', 'A 50 metros por detrás y adelante del vehículo', 'A 100 metros por detrás y adelante del vehículo'], ans: 2, exp: 'En carreteras y caminos, las balizas se colocan a 50 m de la parte posterior y anterior del vehículo. En zonas urbanas y suburbanas (sin suficiente iluminación), la distancia es de 15 m.' },
+  { cat: 'Luces y retrorreflectantes', q: '¿A qué distancia se colocan las balizas en zonas urbanas y suburbanas cuando no hay suficiente iluminación?', opts: ['A 5 metros del vehículo', 'A 15 metros del vehículo', 'A 30 metros del vehículo', 'A 50 metros del vehículo'], ans: 1, exp: 'En zonas urbanas y suburbanas sin suficiente iluminación, las balizas se colocan a 15 m de la parte posterior y anterior del vehículo.' },
+  { cat: 'Luces y retrorreflectantes', q: '¿Qué equipamiento especial de luces deben tener los vehículos de 2 metros o más de ancho total?', opts: ['Solo luces largas de mayor intensidad que los autos', 'Luces de gálibo, de identificación y demarcadoras, además de las normales', 'Únicamente luces traseras adicionales de color rojo', 'No requieren equipamiento especial si llevan las luces reglamentarias normales'], ans: 1, exp: 'Los vehículos de 2 metros o más de ancho total deben llevar: luces de gálibo (ámbar adelante y rojas atrás), tres de identificación adelante y atrás, y lámparas demarcadoras a cada costado.' },
+
+  // JORNADA LABORAL
+  { cat: 'Jornada laboral', q: '¿Cuántas horas consecutivas puede conducir un trabajador sin hacer una pausa?', opts: ['2 horas', '3 horas', '4 horas', '5 horas'], ans: 2, exp: 'Según la Ley 16.039, un trabajador no debiera conducir por un período mayor a cuatro horas sin hacer una pausa.' },
+  { cat: 'Jornada laboral', q: '¿Cuál es la duración máxima de conducción por día, incluyendo horas extraordinarias?', opts: ['6 horas', '8 horas', '9 horas', '12 horas'], ans: 2, exp: 'La duración máxima de conducción, comprendidas las horas extraordinarias, no deberá exceder de nueve horas por día ni de cuarenta y ocho horas por semana.' },
+  { cat: 'Jornada laboral', q: '¿Cuántas horas de descanso diario deben tener los conductores como mínimo?', opts: ['6 horas consecutivas', '8 horas consecutivas', '10 horas consecutivas', '12 horas consecutivas'], ans: 2, exp: 'El descanso diario de los conductores deberá ser por lo menos de diez horas consecutivas (Ley 16.039).' },
+
+  // SUSPENSIÓN
+  { cat: 'Mantenimiento', q: '¿Cuál de estos NO es un efecto de un sistema de suspensión en mal estado?', opts: ['Aumenta la distancia de frenado', 'Provoca desgaste irregular de neumáticos', 'Mejora la estabilidad y el confort de conducción', 'Puede deslumbrar al oscilar las luces durante la marcha'], ans: 2, exp: 'Un sistema de suspensión en mal estado aumenta la distancia de frenado, provoca fatiga más rápida, balanceos en curvas y frenadas, desgaste irregular de neumáticos y puede hacer oscilar las luces. NO mejora la estabilidad.' },
+  { cat: 'Mantenimiento', q: '¿Cuáles son algunas causas de desgaste prematuro de neumáticos?', opts: ['Velocidad constante, frenadas suaves y presión correcta de inflado', 'Velocidad de circulación, frenadas bruscas, presión de inflado inadecuada, y alineación/balanceo defectuosos', 'Solo el exceso de carga en el vehículo', 'Únicamente las condiciones climáticas adversas'], ans: 1, exp: 'El desgaste prematuro puede deberse a la velocidad de circulación, las frenadas, la presión de inflado, las condiciones atmosféricas, la carga, la alineación y el balanceo, entre otros factores.' },
+  { cat: 'Mantenimiento', q: '¿Qué riesgo implica circular en "punto muerto" (sin cambio puesto) en descensos prolongados?', opts: ['Solo aumenta ligeramente el consumo de combustible', 'Es más inseguro, dificulta el control del vehículo y obliga a usar más los frenos, aumentando su desgaste', 'No genera riesgo adicional si se mantiene una velocidad constante', 'Solo es peligroso en vehículos pesados, no en livianos'], ans: 1, exp: 'Circular en "punto muerto" en descensos hace al vehículo más inseguro, dificulta el control y obliga a utilizar más los frenos (mayor desgaste). Además, supone consumo de combustible sin el beneficio del freno motor.' },
+
+  // CARRIL DE ACELERACIÓN
+  { cat: 'Seguridad vial', q: '¿Qué se debe hacer al ingresar a una vía rápida por el carril de aceleración?', opts: ['Ingresar a la velocidad mínima para no alterar el tráfico', 'Detenerse al inicio del carril si no es seguro y elegir el momento correcto antes de llegar al final', 'Tener prioridad sobre los vehículos de la vía rápida al venir del carril de aceleración', 'Ingresar despacio sin necesidad de alcanzar la velocidad de la vía principal'], ans: 1, exp: 'Si no se puede incorporar con seguridad, hay que detenerse al inicio del carril de aceleración, elegir el momento adecuado y luego aumentar la velocidad para ingresar a la vía principal antes de llegar al final del carril.' },
+
+  // LÍMITE DE PASAJEROS
+  { cat: 'Seguridad vial', q: '¿Qué documento determina la cantidad máxima de pasajeros autorizados en un vehículo?', opts: ['La libreta de conducir del conductor', 'El DIV (Documento de Identificación Vehicular)', 'El permiso de circulación departamental', 'La tarjeta de circulación emitida por el MTOP'], ans: 1, exp: 'La cantidad máxima de pasajeros autorizados para transportar estará determinada por lo establecido en el DIV (Documento de Identificación Vehicular), tomando en cuenta la existencia del conductor.' },
 ]
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -136,6 +159,112 @@ function shuffle<T>(arr: T[]): T[] {
 
 const CATS = ['Todas', ...Array.from(new Set(ALL_QUESTIONS.map(q => q.cat)))]
 const LETTERS = ['A', 'B', 'C', 'D']
+
+// Categorías que vienen del documento oficial → modo examen = respuesta escrita
+const DOC_CATS = new Set(['Reglamentarias', 'Terminales', 'Hospitales', 'Policía'])
+
+// Categorías del manual profesional → modo examen = múltiple opción
+const MANUAL_CATS = new Set(['Seguridad vial', 'Mantenimiento', 'Ómnibus y escolar', 'Mercancías peligrosas', 'Somnolencia y fatiga', 'Espejos y ángulos muertos', 'Cargas', 'Efecto tijera', 'Tacógrafo', 'Luces y retrorreflectantes', 'Jornada laboral'])
+
+function buildExamQuestions(): Question[] {
+  const manualPool = ALL_QUESTIONS.filter(q => MANUAL_CATS.has(q.cat))
+  const mc19 = shuffle(manualPool).slice(0, Math.min(19, manualPool.length))
+  const pick = (cat: string, n: number) =>
+    shuffle(ALL_QUESTIONS.filter(q => q.cat === cat)).slice(0, n)
+  return [
+    ...mc19,
+    ...pick('Reglamentarias', 3),
+    ...pick('Terminales', 2),
+    ...pick('Hospitales', 2),
+    ...pick('Policía', 2),
+  ]
+}
+
+// ─── FUZZY MATCHING ───────────────────────────────────────────────────────────
+
+const ABBR_GROUPS: string[][] = [
+  ['av', 'avenida', 'avda'],
+  ['bv', 'bulevar', 'boulevard', 'blvd'],
+  ['cno', 'camino'],
+  ['gral', 'general'],
+  ['dr', 'doctor'],
+  ['dra', 'doctora'],
+  ['pje', 'pasaje'],
+  ['ing', 'ingeniero'],
+  ['cnel', 'coronel'],
+  ['cte', 'comandante'],
+]
+
+const STOP_WORDS = new Set(['y', 'e', 'de', 'del', 'la', 'el', 'los', 'las', 'un', 'una', 'en', 'a', 'con', 'o', 'que', 'se', 'al', 'le'])
+
+function normalizeStr(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[.,;:'"¿?!¡°ªº()\[\]]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function canonicalToken(t: string): string {
+  const n = t.replace(/\.$/, '')
+  for (const group of ABBR_GROUPS) {
+    if (group.includes(n)) return group[0]
+  }
+  return n
+}
+
+function levenshtein(a: string, b: string): number {
+  if (a === b) return 0
+  if (!a.length) return b.length
+  if (!b.length) return a.length
+  const m: number[][] = Array.from({ length: a.length + 1 }, (_, i) => [i, ...new Array(b.length).fill(0)])
+  for (let j = 0; j <= b.length; j++) m[0][j] = j
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      m[i][j] = a[i - 1] === b[j - 1]
+        ? m[i - 1][j - 1]
+        : 1 + Math.min(m[i - 1][j], m[i][j - 1], m[i - 1][j - 1])
+    }
+  }
+  return m[a.length][b.length]
+}
+
+function maxEditDist(len: number): number {
+  if (len <= 2) return 0
+  if (len <= 5) return 1
+  return 2
+}
+
+function tokenMatches(ansToken: string, inputTokens: string[]): boolean {
+  const ca = canonicalToken(ansToken)
+  return inputTokens.some(it => {
+    const ci = canonicalToken(it)
+    if (ca === ci) return true
+    return levenshtein(ca, ci) <= maxEditDist(Math.max(ca.length, ci.length))
+  })
+}
+
+function checkTextAnswer(userInput: string, correctAnswer: string): { correct: boolean; missingParts: string[] } {
+  const normInput = normalizeStr(userInput)
+  const normAnswer = normalizeStr(correctAnswer)
+  const inputTokens = normInput.split(/\s+/).filter(t => t.length > 0)
+
+  // Split answer into "partes" by " y " / " e " for intersection-type answers
+  const rawParts = correctAnswer.split(/\s+(?:y|e)\s+/i)
+  const missingParts: string[] = []
+
+  for (const part of rawParts) {
+    const normPart = normalizeStr(part)
+    const partTokens = normPart.split(/\s+/).filter(t => t.length > 1 && !STOP_WORDS.has(t))
+    if (partTokens.length === 0) continue
+    const partFound = partTokens.every(pt => tokenMatches(pt, inputTokens))
+    if (!partFound) missingParts.push(part.trim())
+  }
+
+  return { correct: missingParts.length === 0, missingParts }
+}
 
 const MOTIVATIONS: Record<number, string[]> = {
   5:  ['¡Arrancaste bien! Seguí así.', '¡Buen comienzo! La libreta ya se siente más cerca.'],
@@ -161,16 +290,31 @@ interface SessionState {
   score: { total: number; correct: number; wrong: number }
   wrongQuestions: Question[]
   done: boolean
+  textResult: { correct: boolean; missingParts: string[] } | null
+  selectedOpt: number | null
 }
 
 // ─── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────────
 
+const EMPTY_SESSION: SessionState = {
+  session: [],
+  idx: 0,
+  answered: false,
+  score: { total: 0, correct: 0, wrong: 0 },
+  wrongQuestions: [],
+  done: false,
+  textResult: null,
+  selectedOpt: null,
+}
+
 export default function PruebaPage() {
   const [cat, setCat] = useState('Todas')
-  const [mode, setMode] = useState<'practice' | 'exam'>('practice')
+  const [mode, setMode] = useState<'prueba' | 'examen'>('prueba')
   const [appMode, setAppMode] = useState<AppMode>('quiz')
   const [motivation, setMotivation] = useState<string | null>(null)
-  const [questionKey, setQuestionKey] = useState(0) // for animation reset
+  const [questionKey, setQuestionKey] = useState(0)
+  const [textInput, setTextInput] = useState('')
+  const [showFilters, setShowFilters] = useState(false)
 
   const buildSession = useCallback((questions: Question[]): SessionState => ({
     session: shuffle(questions).slice(0, Math.min(25, questions.length)),
@@ -179,25 +323,45 @@ export default function PruebaPage() {
     score: { total: 0, correct: 0, wrong: 0 },
     wrongQuestions: [],
     done: false,
+    textResult: null,
+    selectedOpt: null,
   }), [])
 
-  const [state, setState] = useState<SessionState>(() => {
-    const pool = ALL_QUESTIONS
-    return buildSession(pool)
-  })
+  const [state, setState] = useState<SessionState>(EMPTY_SESSION)
+
+  // Build initial session only on client to avoid SSR/hydration mismatch (Math.random)
+  useEffect(() => {
+    setState(buildSession(ALL_QUESTIONS))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const getPool = useCallback((category: string) => {
     if (category === 'Todas') return ALL_QUESTIONS
     return ALL_QUESTIONS.filter(q => q.cat === category)
   }, [])
 
-  const newSession = useCallback((category: string = cat, keepMode: AppMode = 'quiz') => {
-    const pool = getPool(category)
-    setState(buildSession(pool))
+  const newSession = useCallback((category: string = cat, keepMode: AppMode = 'quiz', forMode?: 'prueba' | 'examen') => {
+    const effectiveMode = forMode ?? mode
+    let sessionQuestions: Question[]
+    if (effectiveMode === 'examen') {
+      sessionQuestions = buildExamQuestions()
+    } else {
+      sessionQuestions = shuffle(getPool(category)).slice(0, Math.min(25, getPool(category).length))
+    }
+    setState({
+      session: sessionQuestions,
+      idx: 0,
+      answered: false,
+      score: { total: 0, correct: 0, wrong: 0 },
+      wrongQuestions: [],
+      done: false,
+      textResult: null,
+      selectedOpt: null,
+    })
     setAppMode(keepMode)
     setMotivation(null)
     setQuestionKey(k => k + 1)
-  }, [cat, getPool, buildSession])
+  }, [cat, getPool, mode])
 
   const startReview = useCallback(() => {
     if (state.wrongQuestions.length === 0) return
@@ -212,9 +376,9 @@ export default function PruebaPage() {
     newSession(c, 'quiz')
   }
 
-  const handleMode = (m: 'practice' | 'exam') => {
+  const handleMode = (m: 'prueba' | 'examen') => {
     setMode(m)
-    newSession(cat, 'quiz')
+    newSession(cat, 'quiz', m)
   }
 
   const handleAnswer = useCallback((optIdx: number) => {
@@ -230,16 +394,35 @@ export default function PruebaPage() {
       const newWrong = correct ? prev.wrongQuestions : [...prev.wrongQuestions, q]
       const msg = getMotivation(newScore.total)
       if (msg) setMotivation(msg)
-      return { ...prev, answered: true, score: newScore, wrongQuestions: newWrong }
+      return { ...prev, answered: true, score: newScore, wrongQuestions: newWrong, textResult: null, selectedOpt: optIdx }
     })
   }, [])
+
+  const handleTextAnswer = useCallback(() => {
+    setState(prev => {
+      if (prev.answered || prev.done) return prev
+      const q = prev.session[prev.idx]
+      const result = checkTextAnswer(textInput, q.opts[q.ans])
+      const correct = result.correct
+      const newScore = {
+        total: prev.score.total + 1,
+        correct: prev.score.correct + (correct ? 1 : 0),
+        wrong: prev.score.wrong + (correct ? 0 : 1),
+      }
+      const newWrong = correct ? prev.wrongQuestions : [...prev.wrongQuestions, q]
+      const msg = getMotivation(newScore.total)
+      if (msg) setMotivation(msg)
+      return { ...prev, answered: true, score: newScore, wrongQuestions: newWrong, textResult: result }
+    })
+  }, [textInput])
 
   const handleNext = useCallback(() => {
     setState(prev => {
       if (prev.idx < prev.session.length - 1) {
         setQuestionKey(k => k + 1)
         setMotivation(null)
-        return { ...prev, idx: prev.idx + 1, answered: false }
+        setTextInput('')
+        return { ...prev, idx: prev.idx + 1, answered: false, textResult: null, selectedOpt: null }
       } else {
         return { ...prev, done: true }
       }
@@ -251,14 +434,16 @@ export default function PruebaPage() {
       if (prev.idx > 0) {
         setQuestionKey(k => k + 1)
         setMotivation(null)
-        return { ...prev, idx: prev.idx - 1, answered: false }
+        setTextInput('')
+        return { ...prev, idx: prev.idx - 1, answered: false, textResult: null, selectedOpt: null }
       }
       return prev
     })
   }, [])
 
-  const { session, idx, answered, score, wrongQuestions, done } = state
+  const { session, idx, answered, score, wrongQuestions, done, textResult, selectedOpt } = state
   const q = session[idx]
+  const isTextMode = mode === 'examen' && q && DOC_CATS.has(q.cat)
   const pct = score.total > 0 ? Math.round(score.correct / score.total * 100) : null
   const progressPct = session.length > 0 ? Math.round(score.total / session.length * 100) : 0
 
@@ -276,24 +461,20 @@ export default function PruebaPage() {
     <main className="min-h-screen py-6 px-4" style={{ background: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)' }}>
       <div className="max-w-2xl mx-auto space-y-4">
 
-        {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center rounded-2xl border border-white/10 backdrop-blur-sm p-6"
-          style={{ background: 'rgba(255,255,255,0.07)' }}
-        >
-          <div className="text-5xl mb-2">🚗</div>
-          <h1 className="text-2xl font-bold text-white mb-1">
-            {appMode === 'review' ? 'Repaso de errores' : 'Simulador — Licencia Categoría E'}
-          </h1>
-          <p className="text-white/60 text-sm">
-            {appMode === 'review'
-              ? `Practicando ${session.length} preguntas que respondiste mal`
-              : 'Transporte de pasajeros · Uber / Cabify · Montevideo'}
-          </p>
-        </motion.div>
+        {/* HEADER — solo visible en modo repaso */}
+        {appMode === 'review' && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center rounded-2xl border border-white/10 backdrop-blur-sm px-6 py-4"
+            style={{ background: 'rgba(255,255,255,0.07)' }}
+          >
+            <p className="text-white font-bold text-sm">
+              Repaso de errores · {session.length} preguntas
+            </p>
+          </motion.div>
+        )}
 
         {/* STATS */}
         <div className="grid grid-cols-4 gap-2">
@@ -357,28 +538,10 @@ export default function PruebaPage() {
         {/* CONTROLS */}
         {!done && (
           <div className="space-y-2">
-            {/* Category tabs */}
-            <div className="flex gap-2 flex-wrap">
-              {CATS.map(c => (
-                <button
-                  key={c}
-                  onClick={() => handleCat(c)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
-                    cat === c
-                      ? 'bg-blue-500 border-blue-500 text-white'
-                      : 'border-white/30 text-white/80 hover:bg-white/20'
-                  }`}
-                  style={cat !== c ? { background: 'rgba(255,255,255,0.1)' } : {}}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-
-            {/* Mode + shuffle */}
+            {/* Mode selector */}
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-white/70 text-xs font-medium">Modo:</span>
-              {(['practice', 'exam'] as const).map(m => (
+              {(['prueba', 'examen'] as const).map(m => (
                 <button
                   key={m}
                   onClick={() => handleMode(m)}
@@ -389,17 +552,79 @@ export default function PruebaPage() {
                   }`}
                   style={mode !== m ? { background: 'rgba(255,255,255,0.1)' } : {}}
                 >
-                  {m === 'practice' ? 'Práctica' : 'Examen'}
+                  {m === 'prueba' ? 'Prueba' : 'Examen'}
                 </button>
               ))}
-              <button
-                onClick={() => newSession(cat, 'quiz')}
-                className="ml-auto px-3 py-1.5 rounded-full text-xs font-semibold border border-white/30 text-white/80 hover:bg-white/20 transition-all duration-200"
-                style={{ background: 'rgba(255,255,255,0.1)' }}
-              >
-                🔀 Nuevas 25
-              </button>
+              {mode === 'prueba' && (
+                <button
+                  onClick={() => newSession(cat, 'quiz')}
+                  className="ml-auto px-3 py-1.5 rounded-full text-xs font-semibold border border-white/30 text-white/80 hover:bg-white/20 transition-all duration-200"
+                  style={{ background: 'rgba(255,255,255,0.1)' }}
+                >
+                  🔀 Nuevas 25
+                </button>
+              )}
+              {mode === 'examen' && (
+                <button
+                  onClick={() => newSession(cat, 'quiz', 'examen')}
+                  className="ml-auto px-3 py-1.5 rounded-full text-xs font-semibold border border-white/30 text-white/80 hover:bg-white/20 transition-all duration-200"
+                  style={{ background: 'rgba(255,255,255,0.1)' }}
+                >
+                  🔀 Nuevo examen
+                </button>
+              )}
             </div>
+
+            {/* Filtros — solo en modo Prueba */}
+            {mode === 'prueba' && (
+              <div>
+                <button
+                  onClick={() => setShowFilters(v => !v)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/30 text-white/80 hover:bg-white/20 transition-all duration-200"
+                  style={{ background: 'rgba(255,255,255,0.1)' }}
+                >
+                  <span>⚙ Filtros</span>
+                  {cat !== 'Todas' && (
+                    <span className="bg-blue-500 text-white rounded-full px-1.5 py-0.5 text-[10px] font-bold">{cat}</span>
+                  )}
+                  <motion.span
+                    animate={{ rotate: showFilters ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-white/50 text-[10px]"
+                  >
+                    ▼
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {showFilters && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="flex gap-2 flex-wrap pt-2">
+                        {CATS.map(c => (
+                          <button
+                            key={c}
+                            onClick={() => { handleCat(c); setShowFilters(false) }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                              cat === c
+                                ? 'bg-blue-500 border-blue-500 text-white'
+                                : 'border-white/30 text-white/80 hover:bg-white/20'
+                            }`}
+                            style={cat !== c ? { background: 'rgba(255,255,255,0.1)' } : {}}
+                          >
+                            {c}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
           </div>
         )}
 
@@ -435,56 +660,140 @@ export default function PruebaPage() {
                   {/* Question */}
                   <p className="text-base font-bold text-gray-900 leading-snug mb-5">{q.q}</p>
 
-                  {/* Options */}
-                  <div className="space-y-2.5">
-                    {q.opts.map((opt, i) => {
-                      let style = ''
-                      if (!answered) {
-                        style = 'border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 cursor-pointer'
-                      } else if (i === q.ans) {
-                        style = mode === 'exam'
-                          ? 'border-emerald-400 bg-emerald-50 text-emerald-800 opacity-80'
-                          : 'border-emerald-400 bg-emerald-50 text-emerald-800'
-                      } else if (i !== q.ans) {
-                        style = 'border-gray-200 bg-gray-50 opacity-50'
-                      }
+                  {/* Options — múltiple elección o texto según modo */}
+                  {isTextMode ? (
+                    <div className="space-y-3">
+                      <textarea
+                        value={textInput}
+                        onChange={e => !answered && setTextInput(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter' && !e.shiftKey && !answered && textInput.trim()) {
+                            e.preventDefault()
+                            handleTextAnswer()
+                          }
+                        }}
+                        disabled={answered}
+                        placeholder="Escribí tu respuesta aquí…"
+                        rows={3}
+                        className={`w-full resize-none rounded-xl border-2 px-4 py-3 text-sm font-medium text-gray-800 outline-none transition-all duration-200 disabled:cursor-default
+                          ${!answered
+                            ? 'border-gray-200 bg-gray-50 focus:border-blue-400 focus:bg-white'
+                            : textResult?.correct
+                              ? 'border-emerald-400 bg-emerald-50 text-emerald-800'
+                              : 'border-rose-400 bg-rose-50 text-rose-800'
+                          }`}
+                      />
 
-                      const letterStyle = answered && i === q.ans
-                        ? 'bg-emerald-400 text-white'
-                        : answered && i !== q.ans
-                        ? 'bg-gray-200 text-gray-400'
-                        : 'bg-gray-200 text-gray-600'
-
-                      return (
+                      {/* Botón confirmar */}
+                      {!answered && (
                         <motion.button
-                          key={i}
-                          onClick={() => !answered && handleAnswer(i)}
-                          disabled={answered}
-                          whileHover={!answered ? { scale: 1.01 } : {}}
-                          whileTap={!answered ? { scale: 0.99 } : {}}
-                          className={`w-full text-left flex items-start gap-3 px-4 py-3 rounded-xl border-2 transition-all duration-150 text-sm font-medium text-gray-700 disabled:cursor-default ${style}`}
+                          onClick={handleTextAnswer}
+                          disabled={!textInput.trim()}
+                          whileHover={textInput.trim() ? { scale: 1.02 } : {}}
+                          whileTap={textInput.trim() ? { scale: 0.98 } : {}}
+                          className="w-full py-2.5 rounded-xl text-sm font-bold text-white bg-blue-500 hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                         >
-                          <span className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-extrabold transition-all duration-150 ${letterStyle}`}>
-                            {LETTERS[i]}
-                          </span>
-                          <span className="leading-relaxed">{opt}</span>
-                          {answered && i === q.ans && (
-                            <motion.span
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="ml-auto text-emerald-500 font-bold flex-shrink-0"
-                            >
-                              ✓
-                            </motion.span>
-                          )}
+                          Confirmar respuesta
                         </motion.button>
-                      )
-                    })}
-                  </div>
+                      )}
 
-                  {/* Explanation */}
+                      {/* Feedback después de responder */}
+                      <AnimatePresence>
+                        {answered && textResult && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            {textResult.correct ? (
+                              <div className="bg-emerald-50 border-l-4 border-emerald-400 rounded-xl px-4 py-3 text-sm text-emerald-800 font-semibold">
+                                ✓ ¡Correcto! La respuesta es: <span className="font-bold">{q.opts[q.ans]}</span>
+                              </div>
+                            ) : (
+                              <div className="bg-rose-50 border-l-4 border-rose-400 rounded-xl px-4 py-3 text-sm text-rose-900 space-y-1.5">
+                                <div className="font-bold">✗ Incorrecto</div>
+                                {textResult.missingParts.length > 0 && (
+                                  <div>
+                                    Faltó o es incorrecto:{' '}
+                                    <span className="font-bold">{textResult.missingParts.join(' / ')}</span>
+                                  </div>
+                                )}
+                                <div className="pt-1 border-t border-rose-200">
+                                  La respuesta correcta es:{' '}
+                                  <span className="font-bold">{q.opts[q.ans]}</span>
+                                </div>
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5">
+                      {q.opts.map((opt, i) => {
+                        const isCorrect = i === q.ans
+                        const isWrongSelected = answered && i === selectedOpt && selectedOpt !== q.ans
+                        let style = ''
+                        if (!answered) {
+                          style = 'border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 cursor-pointer'
+                        } else if (isCorrect) {
+                          style = 'border-emerald-400 bg-emerald-50 text-emerald-800'
+                        } else if (isWrongSelected) {
+                          style = 'border-rose-400 bg-rose-50 text-rose-800'
+                        } else {
+                          style = 'border-gray-200 bg-gray-50 opacity-40'
+                        }
+
+                        const letterStyle = answered && isCorrect
+                          ? 'bg-emerald-400 text-white'
+                          : answered && isWrongSelected
+                          ? 'bg-rose-400 text-white'
+                          : answered
+                          ? 'bg-gray-200 text-gray-400'
+                          : 'bg-gray-200 text-gray-600'
+
+                        return (
+                          <motion.button
+                            key={i}
+                            onClick={() => !answered && handleAnswer(i)}
+                            disabled={answered}
+                            whileHover={!answered ? { scale: 1.01 } : {}}
+                            whileTap={!answered ? { scale: 0.99 } : {}}
+                            className={`w-full text-left flex items-start gap-3 px-4 py-3 rounded-xl border-2 transition-all duration-150 text-sm font-medium text-gray-700 disabled:cursor-default ${style}`}
+                          >
+                            <span className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-extrabold transition-all duration-150 ${letterStyle}`}>
+                              {LETTERS[i]}
+                            </span>
+                            <span className="leading-relaxed">{opt}</span>
+                            {answered && isCorrect && (
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="ml-auto text-emerald-500 font-bold flex-shrink-0"
+                              >
+                                ✓
+                              </motion.span>
+                            )}
+                            {isWrongSelected && (
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="ml-auto text-rose-500 font-bold flex-shrink-0"
+                              >
+                                ✗
+                              </motion.span>
+                            )}
+                          </motion.button>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  {/* Explanation (solo práctica, solo múltiple opción) */}
                   <AnimatePresence>
-                    {answered && mode === 'practice' && (
+                    {answered && mode === 'prueba' && !isTextMode && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
